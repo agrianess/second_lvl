@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing;
 namespace second_lvl
-{
+{ }
+// 1)   Добавить свои объекты в иерархию объектов, чтобы получился красивый задний фон, похожий на полет в звездном пространстве.
+// 2)* Заменить кружочки картинками, используя метод DrawImage.
+
+//Лукашенко Валентина
     class Program
     {
         
