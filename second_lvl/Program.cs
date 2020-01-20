@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing;
 namespace second_lvl
-{
+{ }
+// 1)   Добавить свои объекты в иерархию объектов, чтобы получился красивый задний фон, похожий на полет в звездном пространстве.
+// 2)* Заменить кружочки картинками, используя метод DrawImage.
+
+//Лукашенко Валентина
     class Program
     {
         
@@ -125,7 +129,6 @@ namespace second_lvl
 
             public virtual void  Draw()
             {
-                // Game.Buffer.Graphics.DrawEllipse( Pens.White, Pos.X, Pos.Y, Size.Width, Size.Height);
                 Game.Buffer.Graphics.DrawImage(imgAsteroid,Pos.X,Pos.Y, Size.Width, Size.Height);
             }
             public virtual void Update()
@@ -231,4 +234,4 @@ namespace second_lvl
         }
 
     }
-}
+
