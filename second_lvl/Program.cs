@@ -125,7 +125,6 @@ namespace second_lvl
 
             public virtual void  Draw()
             {
-                // Game.Buffer.Graphics.DrawEllipse( Pens.White, Pos.X, Pos.Y, Size.Width, Size.Height);
                 Game.Buffer.Graphics.DrawImage(imgAsteroid,Pos.X,Pos.Y, Size.Width, Size.Height);
             }
             public virtual void Update()
