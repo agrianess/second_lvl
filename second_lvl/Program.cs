@@ -9,6 +9,7 @@ namespace second_lvl
 {
     class Program
     {
+        
         static void Main(string[] args)
         {
             Form form = new Form();
@@ -23,6 +24,8 @@ namespace second_lvl
 
         static class Game
         {
+            private  static List<Brushes> clr = new List<Brushes>();
+            
             private static BufferedGraphicsContext _context;
             public static BufferedGraphics Buffer;
             // Свойства
@@ -35,15 +38,20 @@ namespace second_lvl
 
 
             public static BaseObject[] _objs;
-         
+            public static BackGroundImage plnt;
+          
+
 
             public static void Load()
             {
                 _objs = new BaseObject[30];
-                for (int i = 0; i < _objs.Length / 2; i++)
-                    _objs[i] = new BaseObject(new Point(600, i * 20), new Point(-i, -i), new Size(10, 10));
-                for (int i = _objs.Length / 2; i < _objs.Length; i++)
-                    _objs[i] = new Star(new Point(600, i * 20), new Point(-i, 0), new Size(5, 5));
+                for (int i = 0; i < _objs.Length; i++)
+                {
+                if (i%2==0) _objs[i] = new BaseObject(new Point(600, i * 20), new Point(-i, -i), new Size(30, 30));
+                else _objs[i] = new Star(new Point(600, i * 20), new Point(-i, 0), new Size(5, 5));
+                }
+                plnt = new BackGroundImage(Width, Height);
+              
             }
 
 
@@ -54,6 +62,9 @@ namespace second_lvl
                 Buffer.Graphics.Clear(Color.Black);
                 foreach (BaseObject obj in _objs)
                     obj.Draw();
+                plnt.Draw();
+         
+               
                 Buffer.Render();
             }
 
@@ -102,17 +113,20 @@ namespace second_lvl
             protected Point Pos;
             protected Point Dir;
             protected Size Size;
+            private Image imgAsteroid;
             public BaseObject(Point pos, Point dir, Size size)
             {
                 Pos = pos;
                 Dir = dir;
                 Size = size;
+                imgAsteroid = Image.FromFile(@"asteroid.png");
             }
 
 
             public virtual void  Draw()
             {
-                Game.Buffer.Graphics.DrawEllipse(Pens.White, Pos.X, Pos.Y, Size.Width, Size.Height);
+                // Game.Buffer.Graphics.DrawEllipse( Pens.White, Pos.X, Pos.Y, Size.Width, Size.Height);
+                Game.Buffer.Graphics.DrawImage(imgAsteroid,Pos.X,Pos.Y, Size.Width, Size.Height);
             }
             public virtual void Update()
             {
@@ -146,8 +160,75 @@ namespace second_lvl
             }
 
         }
+        class Planete: BaseObject
+        {
+            private Brush color;
+            public Planete(Point pos, Point dir, Size size, Brush color) : base(pos, dir, size)
+            {
+                this.color = color;
+            }
+
+            public override void Draw()
+            {
+                Game.Buffer.Graphics.FillEllipse(color, Pos.X, Pos.Y, Size.Width, Size.Height);
+            }
 
 
+            public override void Update()
+            {
+                base.Update();
+            }
+
+
+        }
+        class BackGroundImage
+        {
+            public static Planete[] _planets;
+            private List<Brush> clr;
+
+            public BackGroundImage(int width, int height)
+            {
+                clr = new List<Brush>();
+                clr.Add(Brushes.Beige);
+                clr.Add(Brushes.Gray);
+                clr.Add(Brushes.Aquamarine);
+                clr.Add(Brushes.Red);
+                clr.Add(Brushes.DarkOrange);
+                clr.Add(Brushes.Orchid);
+                clr.Add(Brushes.DarkGoldenrod);
+                clr.Add(Brushes.Orange);
+                clr.Add(Brushes.LawnGreen);
+
+                Random rnd = new Random();
+
+                _planets = new Planete[8];
+                for (int i = 0; i < 8; i++)
+                {
+                    int k = rnd.Next(3, 10);
+                    _planets[i] = new Planete(new Point((int)(width - 70*i-50), (int)(Math.Exp(i))), new Point(0, 0), new Size(7*k, 7 * k), clr.ElementAt(i));
+                }
+                }
+
+            public void Draw()
+            {
+                foreach (Planete f in _planets)
+                {
+                    f.Draw();                    
+
+                }
+            }
+
+            public void Update()
+            {
+                foreach (var item in _planets)
+                {
+                    item.Update();
+                }
+            }
+                
+            
+
+        }
 
     }
 }

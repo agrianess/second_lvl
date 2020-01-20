@@ -1,0 +1,6 @@
+D:\Program C#\second_lvl\second_lvl\bin\Debug\second_lvl.exe.config
+D:\Program C#\second_lvl\second_lvl\bin\Debug\second_lvl.exe
+D:\Program C#\second_lvl\second_lvl\bin\Debug\second_lvl.pdb
+D:\Program C#\second_lvl\second_lvl\obj\Debug\second_lvl.exe
+D:\Program C#\second_lvl\second_lvl\obj\Debug\second_lvl.pdb
+D:\Program C#\second_lvl\second_lvl\obj\Debug\second_lvl.csprojResolveAssemblyReference.cache
